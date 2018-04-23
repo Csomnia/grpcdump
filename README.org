@@ -1,0 +1,18 @@
+* 简单的grpcdump
+** 依赖库
+   #+BEGIN_SRC sh
+   sudo pip install -r requirements.txt
+   #+END_SRC
+** 基本功能
+  使用pcapy进行抓包, 解析出grpc请求(h2报文, 报文头使用hpack库), \\
+  实现简单的请求内容解析, 请求内容默认只支持protobuf协议,\\
+  需要在 =myconfig.py= 中的 =RPC_TYPE= 配置一下rpc调用的参数类型, 同时需要把protobuf编译好的python
+  文件放在 =PTOTO_BUILD_PATH= 指定的路径中, 需要手动设置服务器的端口(=myconfig.py -> SERVER_PORT=).
+  默认只dump出最终stream中的请求信息, 如果需要下层的frame需要改一下log等级.
+** 例子:
+   #+BEGIN_SRC sh
+   sudo python main.py
+   #+END_SRC
+   选择需要监听的interface, 输入lo.\\
+   抓取结果.
+   [[./example.png]]
